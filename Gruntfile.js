@@ -10,17 +10,6 @@ module.exports = (grunt) => {
   grunt.loadNpmTasks('grunt-istanbul');
 
   grunt.initConfig({
-    babel: {
-      options: {
-        sourceMap: true,
-        presets: ['es2015'],
-      },
-      dist: {
-        files: {
-          'app.js': 'app.js',
-        },
-      },
-    },
     env: {
       coverage: {
         APP_DIR_FOR_CODE_COVERAGE: '../../spec/coverage/instrument/app/',
@@ -31,7 +20,6 @@ module.exports = (grunt) => {
       options: {
         lazy: false,
         basePath: 'spec/coverage/instrument/',
-        babel: { ignore: false },
         instrumenter: isparta.Instrumenter,
       },
     },
@@ -57,7 +45,7 @@ module.exports = (grunt) => {
     },
     jasmine_nodejs: {
       options: {
-        specNameSuffix: 'spec.js',
+        specNameSuffix: '.spec.js',
         helperNameSuffix: 'helper.js',
         useHelpers: true,
         stopOnFailure: true,
@@ -70,11 +58,11 @@ module.exports = (grunt) => {
       },
       unit: {
         specs: './spec/unit/**',
-        helpers: ['./node_modules/babel-register/lib/node.js', './spec/helpers/**'],
+        helpers: ['./spec/helpers/**'],
       },
       e2e: {
         specs: './spec/e2e/**',
-        helpers: ['./node_modules/babel-register/lib/node.js', './spec/helpers/**'],
+        helpers: ['./spec/helpers/**'],
       },
     },
     storeCoverage: {
