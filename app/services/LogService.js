@@ -1,14 +1,15 @@
-import winston from 'winston';
+const winston = require('winston');
 
 //
-//  Importing 'winston-papertrail' will expose 'winston.transports.Papertrail'
+//  Requiring 'winston-papertrail' will expose 'winston.transports.Papertrail'
 //
-import 'winston-papertrail';
-import config from './ConfigurationService';
+require('winston-papertrail').Papertrail; // eslint-disable-line no-unused-expressions
+
+const Config = require('./ConfigurationService');
 
 const logger = new winston.Logger();
-const logHost = config.get('LOG_HOST') || '0.0.0.0';
-const logPort = config.get('LOG_PORT') || 12345;
+const logHost = Config.get('LOG_HOST') || '0.0.0.0';
+const logPort = Config.get('LOG_PORT') || 12345;
 
 // Write logs to the console
 logger.add(winston.transports.Console, {
@@ -28,4 +29,4 @@ if (!logPort) {
   logger.error('LOG_PORT for Papertrail is not defined');
 }
 
-export default logger;
+module.exports = logger;

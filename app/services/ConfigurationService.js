@@ -1,3 +1,5 @@
+'use strict'; // eslint-disable-line strict
+
 class ConfigurationService {
 
   static get(k) {
@@ -5,4 +7,4 @@ class ConfigurationService {
   }
 }
 
-export default ConfigurationService;
+module.exports = ConfigurationService;

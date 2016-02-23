@@ -58,11 +58,15 @@ module.exports = (grunt) => {
       },
       unit: {
         specs: './spec/unit/**',
-        helpers: ['./spec/helpers/**'],
+        helpers: [
+          './spec/helpers/**',
+        ],
       },
       e2e: {
         specs: './spec/e2e/**',
-        helpers: ['./spec/helpers/**'],
+        helpers: [
+          './spec/helpers/**',
+        ],
       },
     },
     storeCoverage: {
@@ -80,7 +84,7 @@ module.exports = (grunt) => {
     },
   });
 
-  grunt.registerTask('spec',
+  grunt.registerTask('coverage',
     [
       'env:coverage',
       'instrument',

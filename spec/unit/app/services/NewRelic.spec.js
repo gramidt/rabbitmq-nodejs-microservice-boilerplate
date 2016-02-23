@@ -1,4 +1,6 @@
-/* global requireSubject */
+'use strict'; // eslint-disable-line strict
+
+/* global sandboxRequire */
 
 describe('NewRelic', () => {
   let Config;
@@ -14,7 +16,7 @@ describe('NewRelic', () => {
   it('will log an error if NewRelic license key is not defined', () => {
     Config.get.and.returnValue(null);
 
-    requireSubject('app/services/NewRelic', {
+    sandboxRequire('services/NewRelic', {
       './ConfigurationService': Config,
       './LogService': Log,
     });
@@ -25,7 +27,7 @@ describe('NewRelic', () => {
   it('will require NewRelic if the license key is defined', () => {
     Config.get.and.returnValue('some key');
 
-    requireSubject('app/services/NewRelic', {
+    sandboxRequire('services/NewRelic', {
       './ConfigurationService': Config,
       './LogService': Log,
       newrelic: NewRelic,

@@ -1,5 +1,5 @@
-import Config from './ConfigurationService';
-import Log from './LogService';
+const Config = require('./ConfigurationService');
+const Log = require('./LogService');
 
 const licenseKey = Config.get('NEW_RELIC_LICENSE_KEY');
 

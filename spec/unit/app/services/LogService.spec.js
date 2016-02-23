@@ -1,4 +1,6 @@
-/* global requireSubject */
+'use strict'; // eslint-disable-line strict
+
+/* global sandboxRequire */
 
 describe('LogService', () => {
   let LogService;
@@ -20,11 +22,11 @@ describe('LogService', () => {
   });
 
   it('should create a console transport using defaults', () => {
-    LogService = requireSubject('app/services/LogService', {
+    LogService = sandboxRequire('services/LogService', {
       winston,
       'winston-papertrail': {},
       './ConfigurationService': Config,
-    }).default;
+    });
 
     expect(LogService).not.toBe(null);
     expect(logger.add.calls.argsFor(0)[0]).toBe(winston.transports.Console);
@@ -34,14 +36,14 @@ describe('LogService', () => {
   it('should create a console transport using configurations', () => {
     Config.get.and.returnValue(1);
 
-    LogService = requireSubject('app/services/LogService', {
+    LogService = sandboxRequire('services/LogService', {
       winston,
       'winston-papertrail': {},
       './ConfigurationService': Config,
-    }).default;
+    });
 
     expect(LogService).not.toBe(null);
     expect(logger.add.calls.argsFor(0)[0]).toBe(winston.transports.Console);
-    expect(logger.add.calls.argsFor(0)[1]).toBe(winston.transports.Papertrail);
+    expect(logger.add.calls.argsFor(1)[0]).toBe(winston.transports.Papertrail);
   });
 });
