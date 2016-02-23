@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "A RabbitMQ Dockerized Microservice Worker Boilerplate in Node.js",
   "main": "index.js",
-  "engine": "^5.2",
+  "engine": "^5.6",
   "dependencies": {
     "amqplib": "^0.4.1",
     "coworkers": "^0.5.0",
@@ -28,6 +28,7 @@
     "sandboxed-module": "^2.0.3"
   },
   "scripts": {
+    "dev": "node-inspector -p 8081 & nodemon -L --debug-brk index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
