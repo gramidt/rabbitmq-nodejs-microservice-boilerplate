@@ -12,13 +12,20 @@ ENV NODE_ENV development
 # Where the app lives on the host (container).
 ENV APP_ROOT /src/app
 
+# RabbitMQ configuration.
+ENV RABBITMQ_HOST 127.0.0.1
+ENV RABBITMQ_PORT 5672
+ENV RABBITMQ_USER guest
+ENV RABBITMQ_PASSWORD guest
+ENV RABBITMQ_VHOST /
+
 # Copy the local app to the host.
 COPY ./app/ $APP_ROOT
 
 # Go to the app directory.
 WORKDIR $APP_ROOT
 
-# Prep the app. This would be a good place to build assets and whatnot.
+# Prep the app.
 RUN npm install
 
 # Copy the New Relic configuration file to the app root directory.
