@@ -7,11 +7,11 @@ const Config = require('./services/ConfigurationService');
 
 const queue = 'change-me-queue';
 
-app.queue(queue, () => {
+app.queue(queue, function * dequeueMessage() {
   this.ack = true;
 });
 
-app.on('error', (err, channel, context) => {
+app.on('error', function * errorReceived(err, channel, context) {
   log.error(`${context.queueName} consumer error`, err);
   if (channel) {
     channel.nack(context.message).catch((nackErr) => {

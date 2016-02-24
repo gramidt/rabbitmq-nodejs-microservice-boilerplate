@@ -10,7 +10,7 @@ RUN npm install -g forever nodemon node-inspector
 ENV NODE_ENV development
 
 # Where the app lives on the host (container).
-ENV APP_ROOT /src/app
+ENV APP_ROOT /src
 
 # RabbitMQ configuration.
 ENV RABBITMQ_HOST 127.0.0.1
@@ -20,7 +20,7 @@ ENV RABBITMQ_PASSWORD guest
 ENV RABBITMQ_VHOST /
 
 # Copy the local app to the host.
-COPY ./app/ $APP_ROOT
+COPY . $APP_ROOT
 
 # Go to the app directory.
 WORKDIR $APP_ROOT
@@ -36,4 +36,4 @@ RUN cp node_modules/newrelic/lib/config.default.js newrelic.js
 # Start the app. Notice forever didn't start it with `start`
 # so it wouldn't go into the background. Important that it stays
 # in the foreground.
-CMD forever -w --watchDirectory . index.js
+CMD forever -w --watchDirectory . --minUptime 1000 --spinSleepTime 1000 ./app/index.js

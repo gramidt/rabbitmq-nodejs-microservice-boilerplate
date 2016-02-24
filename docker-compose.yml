@@ -11,8 +11,6 @@ worker:
     # - LOG_PORT=12345
     # - NEW_RELIC_APP_NAME=
     # - NEW_RELIC_LICENSE_KEY=
-  volumes:
-    - ./app:/src/app
   links:
     - rabbitmq
 

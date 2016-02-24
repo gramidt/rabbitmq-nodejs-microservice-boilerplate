@@ -28,7 +28,7 @@
     "sandboxed-module": "^2.0.3"
   },
   "scripts": {
-    "dev": "node-inspector -p 8081 & nodemon -L --debug-brk index.js",
+    "dev": "node-inspector -p 8081 & nodemon -L --debug-brk ./app/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
