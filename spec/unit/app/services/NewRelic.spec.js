@@ -4,12 +4,12 @@
 
 describe('NewRelic', () => {
   let Config;
-  let Log;
+  let log;
   let NewRelic;
 
   beforeEach(() => {
     Config = jasmine.createSpyObj('config', ['get']);
-    Log = jasmine.createSpyObj('log', ['error']);
+    log = jasmine.createSpyObj('log', ['error']);
     NewRelic = {};
   });
 
@@ -18,10 +18,10 @@ describe('NewRelic', () => {
 
     sandboxRequire('services/NewRelic', {
       './ConfigurationService': Config,
-      './LogService': Log,
+      './LogService': log,
     });
 
-    expect(Log.error).toHaveBeenCalledWith(jasmine.any(String));
+    expect(log.error).toHaveBeenCalledWith(jasmine.any(String));
   });
 
   it('will require NewRelic if the license key is defined', () => {
@@ -29,10 +29,10 @@ describe('NewRelic', () => {
 
     sandboxRequire('services/NewRelic', {
       './ConfigurationService': Config,
-      './LogService': Log,
+      './LogService': log,
       newrelic: NewRelic,
     });
 
-    expect(Log.error).not.toHaveBeenCalled();
+    expect(log.error).not.toHaveBeenCalled();
   });
 });
