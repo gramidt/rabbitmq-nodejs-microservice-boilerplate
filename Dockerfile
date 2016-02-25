@@ -12,6 +12,11 @@ ENV NODE_ENV development
 # Where the app lives on the host (container).
 ENV APP_ROOT /src
 
+# Health Check Configuration
+ENV HEALTH_ENDPOINT_NAME some-worker-service-change-me
+ENV HEALTH_ENDPOINT_HOST 0.0.0.0
+ENV HEALTH_ENDPOINT_PORT 12900
+
 # RabbitMQ configuration.
 ENV RABBITMQ_HOST 127.0.0.1
 ENV RABBITMQ_PORT 5672

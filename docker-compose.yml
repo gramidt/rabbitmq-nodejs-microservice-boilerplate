@@ -11,8 +11,14 @@ worker:
     # - LOG_PORT=12345
     # - NEW_RELIC_APP_NAME=
     # - NEW_RELIC_LICENSE_KEY=
+    # - HEALTH_APP_NAME=
+    # - HEALTH_APP_PORT=
   links:
     - rabbitmq
+  volumes:
+    - .:/src
+  ports:
+    - "12900:12900" # Health check port
 
 rabbitmq:
   image: rabbitmq:management

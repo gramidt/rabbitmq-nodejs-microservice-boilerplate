@@ -1,1 +1,2 @@
-module.exports = require('./worker');
+require('./health-check.js');
+require('./worker');

@@ -2,20 +2,32 @@
 
 const coworkers = require('coworkers');
 const app = coworkers();
-const log = require('./services/LogService');
+const logger = require('./services/LogService');
 const Config = require('./services/ConfigurationService');
+const uuid = require('node-uuid');
 
 const queue = 'change-me-queue';
+
+app.use(function * traceMessage(next) {
+  this.id = uuid.v4();
+  // save consumer start time
+  const startTime = Date.now();
+  // move on to the next middleware
+  yield next;
+  // all middlewares have finished
+  const elapsed = Date.now() - startTime;
+  logger.info(`message-trace:${this.id} | Message Transaction Time:${elapsed}`);
+});
 
 app.queue(queue, function * dequeueMessage() {
   this.ack = true;
 });
 
 app.on('error', function * errorReceived(err, channel, context) {
-  log.error(`${context.queueName} consumer error`, err);
+  logger.error(`${context.queueName} consumer error`, err);
   if (channel) {
     channel.nack(context.message).catch((nackErr) => {
-      log.error(nackErr);
+      logger.error(nackErr);
     });
   }
 });
