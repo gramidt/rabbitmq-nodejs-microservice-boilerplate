@@ -7,6 +7,7 @@ const Config = require('./services/ConfigurationService');
 const uuid = require('node-uuid');
 const kardia = require('kardia');
 
+// TODO: Change the queue name.
 const queue = 'change-me-queue';
 
 app.use(function * traceMessage(next) {
@@ -34,6 +35,12 @@ app.use(function * traceMessage(next) {
 });
 
 app.queue(queue, function * dequeueMessage() {
+  //
+  // TODO: Put message processing logic here.
+  //
+
+  // ACK the message to let RabbitMQ know that we've
+  // finished processing the message.
   this.ack = true;
 });
 
