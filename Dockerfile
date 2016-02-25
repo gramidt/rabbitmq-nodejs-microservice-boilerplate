@@ -14,7 +14,6 @@ ENV APP_ROOT /src
 
 # Health Check Configuration
 ENV HEALTH_ENDPOINT_NAME some-worker-service-change-me
-ENV HEALTH_ENDPOINT_HOST 0.0.0.0
 ENV HEALTH_ENDPOINT_PORT 12900
 
 # RabbitMQ configuration.

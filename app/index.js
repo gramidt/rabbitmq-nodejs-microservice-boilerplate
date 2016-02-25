@@ -1,2 +1,2 @@
-require('./health-check.js');
+require('./health-check');
 require('./worker');
