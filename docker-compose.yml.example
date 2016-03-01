@@ -1,0 +1,27 @@
+worker:
+  build: ./
+  environment:
+    - NODE_ENV=development
+    - RABBITMQ_HOST=rabbitmq
+    - RABBITMQ_PORT=5672
+    # - RABBITMQ_USER=
+    # - RABBITMQ_PASSWORD=
+    # - RABBITMQ_VHOST=/
+    # - LOG_HOST=127.0.0.1
+    # - LOG_PORT=12345
+    # - NEW_RELIC_APP_NAME=
+    # - NEW_RELIC_LICENSE_KEY=
+    # - HEALTH_APP_NAME=
+    # - HEALTH_APP_PORT=
+  links:
+    - rabbitmq
+  volumes:
+    - .:/src
+  ports:
+    - "12900:12900" # Health check port
+
+rabbitmq:
+  image: rabbitmq:management
+  ports:
+    - "5672:5672"
+    - "15672:15672"
