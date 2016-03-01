@@ -10,7 +10,7 @@ const kardia = require('kardia');
 // TODO: Change the queue name.
 const queue = 'change-me-queue';
 
-app.use(function * traceMessage(next) {
+app.use(function *traceMessage(next) {
   // Increment the request throughput, so we can
   // monitor it, and use it to dynamically scale
   // additional workers if needed.
@@ -34,7 +34,7 @@ app.use(function * traceMessage(next) {
   kardia.throughput('completed-requests');
 });
 
-app.queue(queue, function * dequeueMessage() {
+app.queue(queue, function *dequeueMessage() {
   //
   // TODO: Put message processing logic here.
   //
@@ -44,7 +44,7 @@ app.queue(queue, function * dequeueMessage() {
   this.ack = true;
 });
 
-app.on('error', function * errorReceived(err, channel, context) {
+app.on('error', function *errorReceived(err, channel, context) {
   // Increment total messages failed, so we can keep
   // tabs on any potential outages.
   kardia.increment('total-messages-failed', 1);
